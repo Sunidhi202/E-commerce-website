@@ -1,0 +1,21 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}phoneNumber Verification{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+    <form action="{% url 'phoneNumberVerification' %}" method="POST">
+        {% csrf_token %}
+        <div class="container card mb-3">
+                <div class="mb-3 p-4">
+                    <label for="phoneNumberField" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumberField" name="phoneNumberField">
+                    <button type="submit" class="btn btn-outline-primary my-2 ">Request OTP</button>
+                </div>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
