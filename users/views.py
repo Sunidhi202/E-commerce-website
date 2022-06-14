@@ -57,7 +57,27 @@ def signup(request):
     except:
         return HttpResponse('Something went wrong :(')
 
+    
+def phoneNumberVerification(request):
+    if request.method == "POST":
+        phoneNumber = request.POST.get('phoneNumberField')
+        if phoneNumber:
+            phoneNumber = '+91'+phoneNumber
+            try:
+                phoneNumber = phonenumbers.parse(phoneNumber)
+                if phonenumbers.is_valid_number(phoneNumber):
+                    print(phoneNumber)
 
+                else:
+                    messages.error(request, 'Please enter a valid phone number')       
+            except:
+                messages.error(request, 'Please enter a valid phone number')        
+        else:
+            messages.error(request, 'Phone number is required')
+
+        return render(request, f"{templatePath}/numberVerification.html")   
+    else:
+        return render(request, f"{templatePath}/numberVerification.html")
 
 def resetpassword(request):
     return render(request, f"{templatePath}/resetpassword.html")    
